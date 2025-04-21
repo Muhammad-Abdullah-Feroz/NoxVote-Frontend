@@ -1,12 +1,35 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router';
 
 const Login = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const navigate = useNavigate()
+    const users = [
+        {
+            username: "john_doe",
+            password: "password123",
+            name: "John Doe",
+            email: "johnDoe@example.com"
+        },
+        {
+            username: "jane_doe",
+            password: "password456",
+            name: "Jane Doe",
+            email: "janeDoe@example.com"
+        }
+    ]
+    
     const onSubmit =(data)=>{
-        console.log(data);
-
+        for (const user in users){
+            if (users[user].email == data.email && users[user].password == data.password){
+                console.log(users[user]);
+                ()=> getUser(users[user])
+                navigate("/user", {state: users[user]})
+                return;
+            }
+        }
     };
 
     return (

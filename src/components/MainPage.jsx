@@ -3,11 +3,16 @@ import Login from './Login'
 import Register from './Register'
 import Lottie from 'lottie-react'
 import About from './About'
+import { useNavigate } from 'react-router'
 
 
 const MainPage = () => {
 
     const [modal, setModal] = useState("welcome")
+    const navigate = useNavigate()
+    const goToDashboard = () => {
+        navigate('/user', { state: user });
+      };
 
     return (
         <div className="page bg-gray-800 h-screen">
