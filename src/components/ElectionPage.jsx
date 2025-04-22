@@ -30,7 +30,7 @@ const ElectionPage = ({ pastElections }) => {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
+    <div className="bg-gray-900 text-white min-h-[90%] p-8">
       <h1 className="text-4xl font-bold text-center mb-10 border-b-4 border-blue-600 pb-2">
         Election Dashboard
       </h1>
@@ -52,7 +52,7 @@ const ElectionPage = ({ pastElections }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="max-w-xl mx-auto bg-gray-800 p-6 rounded-xl shadow-md mb-10"
+            className="max-w-xl mx-auto bg-gray-900 p-6 rounded-xl shadow-md mb-10"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Title */}
@@ -144,7 +144,7 @@ const ElectionPage = ({ pastElections }) => {
               <motion.li
                 layout
                 key={election.id}
-                className="bg-gray-800 p-4 rounded-lg shadow-md"
+                className="bg-gray-900 p-4 rounded-lg shadow-md"
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-lg font-medium">{election.title}</span>

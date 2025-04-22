@@ -12,12 +12,12 @@ const PersonalInfo = ({ user }) => {
     const initials = getInitials(user.name);
 
     return (
-        <div className="bg-gray-800 text-white min-h-screen flex flex-col items-center">
-            <h1 className="font-black text-4xl mb-5 mt-10 border-b-4 border-blue-600 pb-2">
-                Personal Information
+        <div className="bg-gray-900 text-white min-h-[90%] p-8">
+            <h1 className="text-4xl font-bold text-center mb-10 border-b-4 border-blue-600 pb-2">
+                Election Dashboard
             </h1>
 
-            <div className="w-[60%] bg-gray-700 rounded-2xl shadow-lg p-6 ">
+            <div className="w-[60%] bg-gray-700 mx-auto rounded-2xl shadow-lg p-6 ">
                 {/* Profile Photo */}
                 <div className='flex flex-row items-center gap-6 mt-5'>
                     <div className="img flex justify-center items-center w-2/5">
@@ -43,9 +43,9 @@ const PersonalInfo = ({ user }) => {
                         </div>
                     </div>
                 </div>
-                    <div className="flex w-2/3 mx-auto border-t-blue-600 border-t-1 mt-16 flex-row justify-center">
-                        <button className='bg-blue-600 hover:bg-blue-500 text-white text-xl font-medium py-2 px-5 rounded-lg cursor-pointer m-5'>Edit</button>
-                    </div>
+                <div className="flex w-2/3 mx-auto border-t-blue-600 border-t-1 mt-16 flex-row justify-center">
+                    <button className='bg-blue-600 hover:bg-blue-500 text-white text-xl font-medium py-2 px-5 rounded-lg cursor-pointer m-5'>Edit</button>
+                </div>
             </div>
         </div>
     );

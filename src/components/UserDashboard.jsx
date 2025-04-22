@@ -3,6 +3,7 @@ import UserNavbar from './UserNavbar'
 import PersonalInfo from './PersonalInfo';
 import { useLocation } from 'react-router';
 import ElectionPage from './ElectionPage';
+import VotingPage from './VotingPage';
 
 const UserDashboard = () => {
 
@@ -15,13 +16,12 @@ const UserDashboard = () => {
   ]
 
   return (
-    <div className='page bg-gray-800 max-h-screen h-screen'>
+    <div className='page bg-gray-900 max-h-screen h-screen'>
       <UserNavbar getModal = {(value)=>{setModal(value)}} />
-      <div className='content w-full  h-[90%] max-h-[90%] overflow-y-hidden'>
+      <div className='content w-full  h-[90%] max-h-[90%] overflow-y--hidden'>
       {modal == "info" ? <PersonalInfo user={ user1} /> :null}
-      {modal == "contact" ? <div className='font-bold text-white bg-gray-800 text-4xl'>Contact</div>:null}
       {modal == "elections" ? <ElectionPage pastElections={pastElections} />:null}
-      {modal == "vote" ? <div className='font-bold text-white bg-gray-800 text-4xl'>Vote</div>:null}
+      {modal == "vote" ? <VotingPage ongoingElections={pastElections}/> :null}
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
     return (
-        <div className='bg-gray-800 flex flex-col justify-start items-center h-full w-full px-8 py-16 text-white space-y-12'>
+        <div className='bg-gray-900 flex flex-col justify-start items-center h-full w-full px-8 py-16 text-white space-y-12'>
 
             {/* Heading */}
             <h1 className="text-4xl text-blue-600 font-bold">About NoxVote</h1>

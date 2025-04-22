@@ -9,7 +9,7 @@ const Register = () => {
     }
 
     return (
-        <div className="register h-full w-full bg-gray-800 flex flex-col justify-center items-center px-4">
+        <div className="register h-full w-full bg-gray-900 flex flex-col justify-center items-center px-4">
             <h1 className="text-4xl text-blue-600 font-bold my-4">Register in NoxVote</h1>
 
             <form onSubmit={handleSubmit(onsubmit)} className="flex flex-col space-y-2 w-full max-w-md p-8  text-white">

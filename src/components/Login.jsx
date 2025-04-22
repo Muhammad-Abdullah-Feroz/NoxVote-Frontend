@@ -33,7 +33,7 @@ const Login = () => {
     };
 
     return (
-        <div className="login h-full w-full bg-gray-800 flex flex-col justify-center items-center">
+        <div className="login h-full w-full bg-gray-900 flex flex-col justify-center items-center">
 
             <h1 className='text-4xl font-bold text-blue-600'>Login to NoxVote</h1>
             <div className="w-full max-w-md p-8 text-white rounded">

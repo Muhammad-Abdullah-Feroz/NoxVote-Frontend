@@ -15,16 +15,16 @@ const MainPage = () => {
       };
 
     return (
-        <div className="page bg-gray-800 h-screen">
-            <div className="nav text-xl h-[10%] overflow-hidden flex flex-row justify-end items-center ">
-                <ul className="nav flex flex-row justify-evenly w-1/6 items-center bg-gray-800 p-4 text-white space-x-12">
+        <div className="page bg-gray-900 h-screen">
+            <div className="nav text-xl h-[10%] overflow--hidden flex flex-row justify-end items-center ">
+                <ul className="nav flex flex-row justify-evenly w-1/6 items-center bg-gray-900 p-4 text-white space-x-12">
                     <li onClick={()=>{setModal("about")}} className="hover:border-b-blue-600 transition hover:border-b-2 cursor-pointer">About</li>
                     <li className="cursor-pointer"><button onClick={() => { modal == "login" ? setModal("register") : setModal("login") }} className='m-2 cursor-pointer py-2 px-4 bg-blue-600 border-black rounded-lg hover:bg-blue-500'>{modal == "login" ? "Register" : "Login"}</button></li>
                 </ul>
             </div>
 
             <div className="content flex w-full flex-row h-[90%]">
-                <div className="img border-r-2 border-gray-600 w-2/5 h-full bg-gray-800 text-white flex flex-col items-center justify-around py-10 px-6 space-y-6">
+                <div className="img border-r-2 border-gray-600 w-2/5 h-full bg-gray-900 text-white flex flex-col items-center justify-around py-10 px-6 space-y-6">
 
                     {/* Brand Section */}
                     <div className="flex flex-col items-center text-center space-y-2">
@@ -58,7 +58,7 @@ const MainPage = () => {
                     {modal == "login" ? <Login /> : ""}
                     {modal == "register" ? <Register /> : null}
                     {modal == "about" ? <About /> : null}
-                    {modal == "welcome" ? <div className="welcome bg-gray-800 flex flex-col justify-center items-center h-full">
+                    {modal == "welcome" ? <div className="welcome bg-gray-900 flex flex-col justify-center items-center h-full">
                         <h1 className="text-4xl font-bold text-blue-600">Welcome to NoxVote</h1>
                         <p className=" text-white text-2xl mt-4">Be a part of the Decision.</p>
                         <button onClick={() => [setModal("register")]} className='bg-blue-600 text-white text-2xl rounded-xl cursor-pointer m-12 py-2 px-4 hover:bg-blue-500' >Register Now</button>
