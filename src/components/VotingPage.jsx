@@ -27,7 +27,7 @@ const VotingPage = ({ ongoingElections }) => {
       {ongoingElections.length > 0 ? (
         <motion.div
           layout
-          className="space-y-6 max-w-3xl min-h-[90%] mx-auto"
+          className="space-y-6 max-w-3xl min-h-[90%d] mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
