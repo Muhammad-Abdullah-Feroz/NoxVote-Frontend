@@ -1,12 +1,46 @@
+import { nav } from 'framer-motion/client';
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router';
 
 const Register = () => {
 
-    const { register, watch, handleSubmit, formState: { errors } } = useForm();
-    const onsubmit = (data) => {
-        console.log(data);
-    }
+    const { register, watch, handleSubmit, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const onsubmit = async (data) => {
+        try {
+            const response = await fetch("http://localhost:5000/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password,
+                    name: data.name,
+                    username: data.username
+
+                }),
+                credentials: "include"
+            });
+    
+            const result = await response.json();
+    
+            if (response.ok) {
+                console.log(result);
+                alert("User Created");
+                // clear the form
+                reset();
+
+            } else {
+                alert(`Error: ${result.error}`);
+            }
+        } catch (error) {
+            console.error("Network or Server error:", error);
+            alert("An unexpected error occurred");
+        }
+    };
+    
 
     return (
         <div className="register h-full w-full bg-gray-900 flex flex-col justify-center items-center px-4">
@@ -69,7 +103,7 @@ const Register = () => {
                             {...register("confirmPassword", {
                                 required: "Please confirm your password",
                                 validate: (value) =>
-                                    value === password || "Passwords do not match"
+                                    value === watch("password") || "Passwords do not match"
                             })}
                             className="p-3 w-full m- rounded bg-gray-900 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
                         />

@@ -6,31 +6,37 @@ const Login = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const navigate = useNavigate()
-    const users = [
-        {
-            username: "john_doe",
-            password: "password123",
-            name: "John Doe",
-            email: "johnDoe@example.com"
-        },
-        {
-            username: "jane_doe",
-            password: "password456",
-            name: "Jane Doe",
-            email: "janeDoe@example.com"
-        }
-    ]
+        
+    const onSubmit = async (data) => {
+        try {
+            const response = await fetch("http://localhost:5000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password
+                }),
+                credentials: "include"
+            });
     
-    const onSubmit =(data)=>{
-        for (const user in users){
-            if (users[user].email == data.email && users[user].password == data.password){
-                console.log(users[user]);
-                ()=> getUser(users[user])
-                navigate("/user", {state: users[user]})
-                return;
+            const result = await response.json();
+    
+            if (response.ok) {
+                console.log(result); // The complete user object
+                // Call your getUser function (if necessary)
+                // getUser(result.user); 
+                navigate("/user", { state: result.user });
+            } else {
+                alert(`Error: ${result.error}`);
             }
+        } catch (error) {
+            console.error("Network or Server error:", error);
+            alert("An unexpected error occurred");
         }
     };
+    
 
     return (
         <div className="login h-full w-full bg-gray-900 flex flex-col justify-center items-center">
