@@ -21,10 +21,34 @@ const PersonalInfo = ({ user }) => {
     }
   });
 
-  const onSubmit = (data) => {
-    setEditableUser((prev) => ({ ...prev, ...data }));
-    setShowEdit(false);
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://localhost:5000/update-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: editableUser.email,
+          name: data.name,
+          password: data.password,
+        }),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        setEditableUser((prev) => ({ ...prev, ...data }));
+        setShowEdit(false);
+        alert("User info updated successfully");
+      } else {
+        alert(result.error || "Update failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred");
+    }
   };
+  
 
   return (
     <div className="bg-gray-900 text-white min-h-[90%] p-8 relative">
