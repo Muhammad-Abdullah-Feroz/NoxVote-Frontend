@@ -4,6 +4,7 @@ import PersonalInfo from './PersonalInfo';
 import { useLocation } from 'react-router';
 import ElectionPage from './ElectionPage';
 import VotingPage from './VotingPage';
+import ResultsPage from './ResultsPage';
 
 const UserDashboard = () => {
 
@@ -22,6 +23,8 @@ const UserDashboard = () => {
       {modal == "info" ? <PersonalInfo user={ user1} /> :null}
       {modal == "elections" ? <ElectionPage userEmail={user1.email} />:null}
       {modal == "vote" ? <VotingPage userEmail={user1.email}/> :null}
+      {modal == "results" ? <ResultsPage /> :null}
+
       </div>
     </div>
   )
