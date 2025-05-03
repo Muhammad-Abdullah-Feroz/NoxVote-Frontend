@@ -31,9 +31,14 @@ const PollStat = ({ poll, onClose }) => {
             </h2>
 
             {/* Closing Date */}
+            <div className="flex flex-col justify-evenly items-center">
+            <p className="text-sm text-center text-gray-400 mb-4">
+              Created By: {poll.created_by}
+            </p>
             <p className="text-sm text-center text-gray-400 mb-4">
               Closing Date: {poll.closing_date}
             </p>
+            </div>
 
             {/* Candidates and Votes */}
             <ul className="space-y-3">

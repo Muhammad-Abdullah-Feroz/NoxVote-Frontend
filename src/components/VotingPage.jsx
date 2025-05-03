@@ -1,20 +1,82 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const VotingPage = ({ ongoingElections }) => {
+const VotingPage = ({ userEmail }) => {
   const [votes, setVotes] = useState({});
   const [submitted, setSubmitted] = useState({});
+  const [ongoingElections, setOngoingElections] = useState([]);
+  const [userVoteStatus, setUserVoteStatus] = useState({});
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        // 1. Get polls
+        const pollsRes = await fetch("http://localhost:5000/ongoing_polls");
+        if (!pollsRes.ok) throw new Error("Failed to fetch polls");
+        const pollData = await pollsRes.json();
+        setOngoingElections(pollData.ongoing_polls);
+
+        // 2. Get user vote status
+        const voteStatusRes = await fetch(`http://localhost:5000/user_vote_status?userEmail=${userEmail}`);
+        if (!voteStatusRes.ok) throw new Error("Failed to fetch user vote status");
+        const voteStatusData = await voteStatusRes.json();
+        setUserVoteStatus(voteStatusData.user_votes);
+
+        // 3. Prepopulate votes and submitted
+        const initialVotes = {};
+        const initialSubmitted = {};
+        for (const pollId in voteStatusData.user_votes) {
+          const { voted, candidate } = voteStatusData.user_votes[pollId];
+          if (voted) {
+            initialVotes[pollId] = candidate;
+            initialSubmitted[pollId] = true;
+          }
+        }
+        setVotes(initialVotes);
+        setSubmitted(initialSubmitted);
+      } catch (error) {
+        console.error("❌ Error loading data:", error);
+      }
+    };
+
+    fetchInitialData();
+  }, [userEmail]);
 
   const handleVote = (electionId, option) => {
     setVotes((prev) => ({ ...prev, [electionId]: option }));
   };
 
-  const handleSubmitVote = (electionId) => {
-    if (votes[electionId]) {
-      setSubmitted((prev) => ({ ...prev, [electionId]: true }));
+  const handleSubmitVote = async (electionId) => {
+    const selectedCandidate = votes[electionId];
+    const election = ongoingElections.find(e => e.id === electionId);
 
-      // Optionally send vote to backend here
-      console.log(`Submitted vote for Election ${electionId}: ${votes[electionId]}`);
+    if (!selectedCandidate || !election) return;
+
+    try {
+      const response = await fetch("http://localhost:5000/cast_vote", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          poll_name: election.poll_name,
+          candidate: selectedCandidate,
+          userEmail: userEmail,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitted((prev) => ({ ...prev, [electionId]: true }));
+        console.log(`✅ Vote submitted: ${selectedCandidate}`);
+      } else {
+        alert(`❌ Error: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("❌ Error submitting vote:", error);
+      alert("❌ Failed to submit vote. Please try again.");
     }
   };
 
@@ -27,7 +89,7 @@ const VotingPage = ({ ongoingElections }) => {
       {ongoingElections.length > 0 ? (
         <motion.div
           layout
-          className="space-y-6 max-w-3xl min-h-[90%d] mx-auto"
+          className="space-y-6 max-w-3xl mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -37,11 +99,11 @@ const VotingPage = ({ ongoingElections }) => {
               layout
               className="bg-gray-800 p-6 rounded-lg shadow-lg"
             >
-              <h2 className="text-2xl font-semibold mb-1">{election.title}</h2>
-              <p className="text-gray-400 mb-4 text-sm">Ends on: {election.date}</p>
+              <h2 className="text-2xl font-semibold mb-1">{election.poll_name}</h2>
+              <p className="text-gray-400 mb-4 text-sm">Ends on: {election.closing_date}</p>
 
               <div className="space-y-2 mb-4">
-                {election.options.map((option, index) => (
+                {election.candidates.map((option, index) => (
                   <label
                     key={index}
                     className={`flex items-center gap-3 bg-gray-700 px-4 py-2 rounded cursor-pointer transition 

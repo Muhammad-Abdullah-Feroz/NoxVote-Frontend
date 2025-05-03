@@ -21,7 +21,7 @@ const UserDashboard = () => {
       <div className='content w-full  h-[90%] max-h-[90%] overflow-y--hidden'>
       {modal == "info" ? <PersonalInfo user={ user1} /> :null}
       {modal == "elections" ? <ElectionPage userEmail={user1.email} />:null}
-      {modal == "vote" ? <VotingPage ongoingElections={pastElections}/> :null}
+      {modal == "vote" ? <VotingPage userEmail={user1.email}/> :null}
       </div>
     </div>
   )

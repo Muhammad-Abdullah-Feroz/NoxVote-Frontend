@@ -48,7 +48,7 @@ const ElectionPage = ({ userEmail }) => {
     if (userEmail) {
       fetchElections();
     }
-  }, [userEmail]);
+  }, []);
 
 
   // Create election via backend API
@@ -218,18 +218,18 @@ const ElectionPage = ({ userEmail }) => {
               <motion.li
                 layout
                 key={election.id}
-                className="bg-gray-900 p-4 rounded-lg shadow-md"
+                className="hover:bg-gray-800 bg-gray-900 transition cursor-pointer p-4 rounded-lg shadow-md"
                 onClick={() => handleElectionClick(election)}
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-lg font-medium">{election.poll_name}</span>
                   <span className="text-sm text-gray-400">{election.closing_date}</span>
                 </div>
-                <ul className="text-sm text-gray-300 list-disc ml-6">
+                {/* <ul className="text-sm text-gray-300 list-disc ml-6">
                   {election.candidates.map((opt, i) => (
                     <li key={i}>{opt}</li>
                   ))}
-                </ul>
+                </ul> */}
               </motion.li>
             ))}
             {console.log(elections)}
