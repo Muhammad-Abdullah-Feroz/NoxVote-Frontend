@@ -20,7 +20,7 @@ const UserDashboard = () => {
       <UserNavbar getModal = {(value)=>{setModal(value)}} />
       <div className='content w-full  h-[90%] max-h-[90%] overflow-y--hidden'>
       {modal == "info" ? <PersonalInfo user={ user1} /> :null}
-      {modal == "elections" ? <ElectionPage pastElections={pastElections} />:null}
+      {modal == "elections" ? <ElectionPage userEmail={user1.email} />:null}
       {modal == "vote" ? <VotingPage ongoingElections={pastElections}/> :null}
       </div>
     </div>
