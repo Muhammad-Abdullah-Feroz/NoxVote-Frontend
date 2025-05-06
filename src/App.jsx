@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router";
 import './App.css'
+import { Toaster } from 'react-hot-toast';
 
 import MainPage from './components/MainPage'
 import UserDashboard from './components/UserDashboard';
@@ -21,7 +22,10 @@ function App() {
     }
   ]);
   return (
+    <>
+    <Toaster/>
     <RouterProvider router={router} />
+    </>
   )
 }
 

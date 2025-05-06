@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const getInitials = (name) => {
   return name
@@ -39,13 +40,13 @@ const PersonalInfo = ({ user }) => {
       if (response.ok) {
         setEditableUser((prev) => ({ ...prev, ...data }));
         setShowEdit(false);
-        alert("User info updated successfully");
+        toast.success("User info updated successfully");
       } else {
-        alert(result.error || "Update failed");
+        toast.error(result.error || "Update failed");
       }
     } catch (err) {
       console.error(err);
-      alert("An error occurred");
+      toast.error("An error occurred");
     }
   };
   

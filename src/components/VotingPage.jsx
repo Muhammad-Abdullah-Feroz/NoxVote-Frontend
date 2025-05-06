@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
 
 const VotingPage = ({ userEmail }) => {
   const [votes, setVotes] = useState({});
@@ -17,8 +18,11 @@ const VotingPage = ({ userEmail }) => {
         setOngoingElections(pollData.ongoing_polls);
 
         // 2. Get user vote status
-        const voteStatusRes = await fetch(`http://localhost:5000/user_vote_status?userEmail=${userEmail}`);
-        if (!voteStatusRes.ok) throw new Error("Failed to fetch user vote status");
+        const voteStatusRes = await fetch(
+          `http://localhost:5000/user_vote_status?userEmail=${userEmail}`
+        );
+        if (!voteStatusRes.ok)
+          throw new Error("Failed to fetch user vote status");
         const voteStatusData = await voteStatusRes.json();
         setUserVoteStatus(voteStatusData.user_votes);
 
@@ -48,7 +52,7 @@ const VotingPage = ({ userEmail }) => {
 
   const handleSubmitVote = async (electionId) => {
     const selectedCandidate = votes[electionId];
-    const election = ongoingElections.find(e => e.id === electionId);
+    const election = ongoingElections.find((e) => e.id === electionId);
 
     if (!selectedCandidate || !election) return;
 
@@ -72,11 +76,11 @@ const VotingPage = ({ userEmail }) => {
         setSubmitted((prev) => ({ ...prev, [electionId]: true }));
         console.log(`✅ Vote submitted: ${selectedCandidate}`);
       } else {
-        alert(`❌ Error: ${result.error}`);
+        toast.error(` Error: ${result.error}`);
       }
     } catch (error) {
       console.error("❌ Error submitting vote:", error);
-      alert("❌ Failed to submit vote. Please try again.");
+      toast.error("Failed to submit vote. Please try again.");
     }
   };
 
@@ -99,15 +103,23 @@ const VotingPage = ({ userEmail }) => {
               layout
               className="bg-gray-800 p-6 rounded-lg shadow-lg"
             >
-              <h2 className="text-2xl font-semibold mb-1">{election.poll_name}</h2>
-              <p className="text-gray-400 mb-4 text-sm">Ends on: {election.closing_date}</p>
+              <h2 className="text-2xl font-semibold mb-1">
+                {election.poll_name}
+              </h2>
+              <p className="text-gray-400 mb-4 text-sm">
+                Ends on: {election.closing_date}
+              </p>
 
               <div className="space-y-2 mb-4">
                 {election.candidates.map((option, index) => (
                   <label
                     key={index}
                     className={`flex items-center gap-3 bg-gray-700 px-4 py-2 rounded cursor-pointer transition 
-                      ${votes[election.id] === option ? 'border border-blue-500 bg-opacity-80' : 'hover:bg-gray-600'}`}
+                      ${
+                        votes[election.id] === option
+                          ? "border border-blue-500 bg-opacity-80"
+                          : "hover:bg-gray-600"
+                      }`}
                   >
                     <input
                       type="radio"
@@ -139,7 +151,8 @@ const VotingPage = ({ userEmail }) => {
                     exit={{ opacity: 0, y: 10 }}
                     className="text-blue-400 font-medium"
                   >
-                    ✅ Vote Submitted: <span className="font-semibold">{votes[election.id]}</span>
+                    ✅ Vote Submitted:{" "}
+                    <span className="font-semibold">{votes[election.id]}</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -147,7 +160,9 @@ const VotingPage = ({ userEmail }) => {
           ))}
         </motion.div>
       ) : (
-        <p className="text-center text-gray-400 text-lg">No ongoing elections at the moment.</p>
+        <p className="text-center text-gray-400 text-lg">
+          No ongoing elections at the moment.
+        </p>
       )}
     </div>
   );

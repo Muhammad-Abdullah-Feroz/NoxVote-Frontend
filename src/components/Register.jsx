@@ -1,6 +1,7 @@
 import { nav } from 'framer-motion/client';
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 
 const Register = () => {
@@ -28,16 +29,16 @@ const Register = () => {
     
             if (response.ok) {
                 console.log(result);
-                alert("User Created");
+                toast.success("User Created");
                 // clear the form
                 reset();
 
             } else {
-                alert(`Error: ${result.error}`);
+                toast.error(`Error: ${result.error}`);
             }
         } catch (error) {
             console.error("Network or Server error:", error);
-            alert("An unexpected error occurred");
+            toast.error("An unexpected error occurred");
         }
     };
     
