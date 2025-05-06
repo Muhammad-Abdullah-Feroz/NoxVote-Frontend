@@ -17,7 +17,7 @@ const UserDashboard = () => {
   ]
 
   return (
-    <div className='page bg-gray-900 max-h-screen h-screen'>
+    <div className='page  max-h-screen h-screen'>
       <UserNavbar getModal = {(value)=>{setModal(value)}} />
       <div className='content w-full  h-[90%] max-h-[90%] overflow-y--hidden'>
       {modal == "info" ? <PersonalInfo user={ user1} /> :null}

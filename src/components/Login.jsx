@@ -47,8 +47,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login h-full w-full bg-gray-900 flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-bold text-blue-600">Login to NoxVote</h1>
+    <div className="login h-full w-full  flex flex-col justify-center items-center">
+      <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500  text-transparent bg-clip-text mb-2 ">
+        Login to NoxVote
+      </h1>
       <div className="w-full max-w-md p-8 text-white rounded">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>

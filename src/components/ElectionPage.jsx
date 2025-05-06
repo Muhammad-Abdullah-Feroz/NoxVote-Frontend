@@ -107,8 +107,8 @@ const ElectionPage = ({ userEmail }) => {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-[90%] p-8">
-      <h1 className="text-4xl font-bold text-center mb-10 border-b-4 border-blue-600 pb-2">
+    <div className=" text-white min-h-[90%] p-8">
+      <h1 className="text-4xl font-bold text-center mb-10 border-b-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text pb-2">
         Election Dashboard
       </h1>
 
@@ -129,7 +129,7 @@ const ElectionPage = ({ userEmail }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="max-w-xl mx-auto bg-gray-900 p-6 rounded-xl shadow-md mb-10"
+            className="max-w-xl mx-auto backdrop-blur-sm r p-6 rounded-xl bg-gray-800 mb-10"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Title */}

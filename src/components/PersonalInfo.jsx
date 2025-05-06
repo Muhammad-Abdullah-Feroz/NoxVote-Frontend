@@ -52,13 +52,13 @@ const PersonalInfo = ({ user }) => {
   
 
   return (
-    <div className="bg-gray-900 text-white min-h-[90%] p-8 relative">
-      <h1 className="text-4xl font-bold text-center mb-10 border-b-4 border-blue-600 pb-2">
+    <div className=" text-white min-h-[90%] p-8 relative">
+      <h1 className="text-4xl font-bold text-center mb-10 border-b-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text pb-2">
         Election Dashboard
       </h1>
 
-      <div className="w-[60%] bg-gray-700 mx-auto rounded-2xl shadow-lg p-6 ">
-        <div className='flex flex-row items-center gap-6 mt-5'>
+      <div className="w-[60%] backdrop-blur-sm  bg-gray-800 mx-auto rounded-2xl shadow-lg p-6 ">
+        <div className="flex flex-row items-center gap-6 mt-5">
           <div className="img flex justify-center items-center w-2/5">
             <div className="bg-blue-600 cursor-pointer hover:bg-blue-500 transition rounded-full h-32 w-32 flex items-center justify-center text-4xl font-bold">
               {initials}
@@ -85,10 +85,13 @@ const PersonalInfo = ({ user }) => {
         <div className="flex w-2/3 mx-auto border-t-blue-600 border-t-1 mt-16 flex-row justify-center">
           <button
             onClick={() => {
-              reset({ name: editableUser.name, password: editableUser.password });
+              reset({
+                name: editableUser.name,
+                password: editableUser.password,
+              });
               setShowEdit(true);
             }}
-            className='bg-blue-600 hover:bg-blue-500 text-white text-xl font-medium py-2 px-5 rounded-lg cursor-pointer m-5'
+            className="bg-blue-600 hover:bg-blue-500 text-white text-xl font-medium py-2 px-5 rounded-lg cursor-pointer m-5"
           >
             Edit
           </button>
@@ -110,27 +113,43 @@ const PersonalInfo = ({ user }) => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
             >
-              <h2 className="text-2xl font-bold mb-4 text-center text-blue-400">Edit Information</h2>
+              <h2 className="text-2xl font-bold mb-4 text-center text-blue-400">
+                Edit Information
+              </h2>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <label className="block text-sm text-gray-300 mb-1">Name</label>
+                  <label className="block text-sm text-gray-300 mb-1">
+                    Name
+                  </label>
                   <input
                     type="text"
                     {...register("name", { required: "Name is required" })}
                     className="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.name.message}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-300 mb-1">Password</label>
+                  <label className="block text-sm text-gray-300 mb-1">
+                    Password
+                  </label>
                   <input
                     type="password"
-                    {...register("password", { required: "password is required" })}
+                    {...register("password", {
+                      required: "password is required",
+                    })}
                     className="w-full px-4 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex justify-between">

@@ -85,8 +85,8 @@ const VotingPage = ({ userEmail }) => {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
-      <h1 className="text-4xl font-bold text-center mb-10 border-b-4 border-blue-600 pb-2">
+    <div className=" text-white min-h-screen p-8">
+      <h1 className="text-4xl font-bold text-center mb-10 border-b-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text pb-2">
         Cast Your Vote
       </h1>
 

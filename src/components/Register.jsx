@@ -50,8 +50,8 @@ const Register = () => {
   };
 
   return (
-    <div className="register h-full w-full bg-gray-900 flex flex-col justify-center items-center px-4">
-      <h1 className="text-4xl text-blue-600 font-bold my-4">
+    <div className="register h-full w-full  flex flex-col justify-center items-center px-4">
+      <h1 className="text-4xl  bg-gradient-to-r from-blue-500 to-purple-500  text-transparent bg-clip-text  font-bold my-4">
         Register in NoxVote
       </h1>
 

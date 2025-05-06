@@ -23,10 +23,18 @@ function App() {
   ]);
   return (
     <>
-    <Toaster/>
-    <RouterProvider router={router} />
+      <Toaster />
+      <div className="relative min-h-screen overflow-x-hidden">
+        {/* Animated background shapes */}
+        <div className="animated-bg-shape bg-shape-1"></div>
+        <div className="animated-bg-shape bg-shape-2"></div>
+        <div className="animated-bg-shape bg-shape-3"></div>
+        <div className="relative z-10">
+          <RouterProvider router={router} />
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
 export default App

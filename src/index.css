@@ -1,1 +1,100 @@
 @import "tailwindcss";
+:root {
+  --background: rgb(16, 24, 40);
+  --foreground: rgb(248, 250, 252);
+  --card: rgb(16, 24, 40);
+  --card-foreground: rgb(248, 250, 252);
+  --popover: rgb(16, 24, 40);
+  --popover-foreground: rgb(248, 250, 252);
+  --primary: rgb(59, 130, 246);
+  --primary-foreground: rgb(248, 250, 252);
+  --secondary: rgb(30, 41, 59);
+  --secondary-foreground: rgb(248, 250, 252);
+  --muted: rgb(30, 41, 59);
+  --muted-foreground: rgb(148, 163, 184);
+  --accent: rgb(30, 41, 59);
+  --accent-foreground: rgb(248, 250, 252);
+  --destructive: rgb(239, 68, 68);
+  --destructive-foreground: rgb(248, 250, 252);
+  --border: rgb(30, 41, 59);
+  --input: rgb(30, 41, 59);
+  --ring: rgb(203, 213, 225);
+  --radius: 0.5rem;
+}
+
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Animations for the background */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-100px) translateX(10px);
+  }
+  50% {
+    transform: translateY(0) translateX(20px);
+  }
+  75% {
+    transform: translateY(100px) translateX(10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animated-bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.bg-shape-1 {
+  width: 300px;
+  height: 300px;
+  background: rgb(66, 73, 255);
+  top: 10%;
+  left: 20%;
+  animation: pulse 5s infinite ;
+}
+
+.bg-shape-2 {
+  width: 400px;
+  height: 400px;
+  background: rgb(126, 55, 255);
+  top: 60%;
+  right: 15%;
+  animation: float 7s infinite ;
+}
+
+.bg-shape-3 {
+  width: 200px;
+  height: 200px;
+  background: rgb(0, 204, 255);
+  bottom: 15%;
+  left: 10%;
+  animation: pulse 2s infinite ;
+}
